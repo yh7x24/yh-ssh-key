@@ -1,9 +1,0 @@
----
-# tasks file for yh-user
-
-
-- include: add-user.yml
-  when: sub_cmd == 'add' or sub_cmd == 'config'
-
-- include: rm-user.yml
-  when: sub_cmd == 'rm'

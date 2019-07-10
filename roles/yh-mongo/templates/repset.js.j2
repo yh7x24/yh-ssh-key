@@ -1,6 +1,0 @@
-config={_id:"{{ mongod_conf_replSet }}",members:[{
-{%- for key,value in mongod_conf_members.iteritems() -%}
-_id:{{ key }},host:"{{ value }}"{%- if not loop.last -%} },{ {%- endif -%}
-{%- endfor -%}}]};
-
-rs.initiate(config);

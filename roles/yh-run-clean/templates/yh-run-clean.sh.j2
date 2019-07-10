@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# clean var/run dir
-# find "{{ xdc_run_dir }}" -name '*.pid' -or -name '*.lock' | xargs rm -vf
-[ -d "{{ xdc_run_dir }}" ] && {
-  rm -rvf {{ xdc_run_dir }}/*.pid
-  rm -rvf {{ xdc_run_dir }}/*.lock
-}
