@@ -1,0 +1,18 @@
+---
+# sub tasks for yh-os-init
+#
+# Install for Debain/Ubuntu
+#
+
+
+# 安装 Debian/Ubuntu 必备工具集
+- block:
+  - name: install-dev-env
+    apt: name="build-essential"
+  - name: install-com-tools-libs
+    apt:
+      name: [ "vim", "tree", "screen", "ruby", "net-tools", "dnsutils", "iputils-ping", "numactl" ]
+  when: ansible_os_family == "Debian"
+  tags: install-com-tools-libs
+
+
