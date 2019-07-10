@@ -52,7 +52,7 @@ gpull-yh: yh-os-init
 
 gpush: gpush-self gpush-yh-os-init 
 gpush-self: gpom
-gpush-yh: yh
+gpush-yh-os-init: yh
 	git subtree push --prefix=roles/$< $< $(BRANCH) || >/dev/null
 
 
