@@ -43,32 +43,25 @@ ga:
 	git add .
 
 init:
-yh-os-init:
-	$(call doSubInit,yh-os-init)
-yh-user:
-	$(call doSubInit,yh-user)
 
-gpull:  gpull-self gpull-yh-os-init
+gpull:  gpull-self gpull-sub
 gpull-self:
 	git pull
-gpull-yh-os-init: yh-os-init
-	$(call doSubPull,$<)
-gpull-yh-user: yh-user
-	$(call doSubPull,$<)
-
-# grep "$$x" .git/config >/dev/null || git remote add -f $$x git@github.com:yh7x24/$$x.git; \
-# [ ! -d "roles/$$x" ] && git subtree add --prefix=roles/$$x $$x $(BRANCH) --squash || >/dev/null; \
-		
 gpull-sub:
 	for x in $(SUB_LIST); do \
-		$(call doSubInit,$$x); \
+		grep "$$x" .git/config >/dev/null || git remote add -f $$x git@github.com:yh7x24/$$x.git; \
+		[ ! -d "roles/$$x" ] && git subtree add --prefix=roles/$$x $$x $(BRANCH) --squash || >/dev/null; \
 		$(call doSubPull,$$x); \
 	done;
 
-gpush: gpush-self gpush-yh-os-init 
+gpush: gpush-self gpush-sub
 gpush-self: gpom
-gpush-yh-os-init: yh-os-init
-	git subtree push --prefix=roles/$< $< $(BRANCH) || >/dev/null
+gpush-sub:
+	for x in $(SUB_LIST); do \
+		grep "$$x" .git/config >/dev/null || git remote add -f $$x git@github.com:yh7x24/$$x.git; \
+		[ ! -d "roles/$$x" ] && git subtree add --prefix=roles/$$x $$x $(BRANCH) --squash || >/dev/null; \
+		$(call doSubPush,$$x); \
+	done;
 
 
 # ####################################
