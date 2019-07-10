@@ -1,9 +1,0 @@
----
-# tasks file for yh-os-init
-
-
-- include_tasks: init-os-debian.yml
-  when: ansible_os_family == "Debian"
-
-- include_tasks: init-os-redhat.yml
-  when: ansible_os_family == "RedHat"
