@@ -47,7 +47,7 @@ ga:
 gpull:  gpull-self gpull-yh-os-init
 gpull-self:
 	git pull
-gpull-yh: yh-os-init
+gpull-yh-os-init: yh-os-init
 	git subtree pull --prefix=roles/$< $< $(BRANCH) --squash
 
 gpush: gpush-self gpush-yh-os-init 
