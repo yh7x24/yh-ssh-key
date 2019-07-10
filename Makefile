@@ -56,10 +56,12 @@ gpull-yh-os-init: yh-os-init
 gpull-yh-user: yh-user
 	$(call doSubPull,$<)
 
+# grep "$$x" .git/config >/dev/null || git remote add -f $$x git@github.com:yh7x24/$$x.git; \
+# [ ! -d "roles/$$x" ] && git subtree add --prefix=roles/$$x $$x $(BRANCH) --squash || >/dev/null; \
+		
 gpull-sub:
 	for x in $(SUB_LIST); do \
-        	grep "$$x" .git/config >/dev/null || git remote add -f $$x git@github.com:yh7x24/$$x.git; \
-        	[ ! -d "roles/$$x" ] && git subtree add --prefix=roles/$$x $$x $(BRANCH) --squash || >/dev/null; \
+		$(call doSubInit,$$x); \
 		$(call doSubPull,$$x); \
 	done;
 
