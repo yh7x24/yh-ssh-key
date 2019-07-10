@@ -14,7 +14,7 @@ var_dir_prefix: "" # e.g. "home-", "user-"
 var_dir_suffix: ".u" # e.g. ".u", ".v", ".d"
 
 can_sudo: false
-
+sub_cmd: "add"
 
 # ####################################
 # Advanced/Optional Config
@@ -36,5 +36,4 @@ yh_runtime_path: "{{ yh_var_path }}/lib" # 运行时: 临时、缓冲文件等
 
 # Runtime Dateset Dirs
 var_log_hub: "{{ var_hub }}/log/{{ var_dir_prefix }}{{ yh_user }}{{ var_dir_suffix }}"
-var_run_hub: "{{ var_hub }}/run"
 var_lib_hub: "{{ var_hub }}/lib/{{ var_dir_prefix }}{{ yh_user }}{{ var_dir_suffix }}"

@@ -12,7 +12,7 @@
     group: name="{{ yh_group }}" state=absent
 
   - name: rm-yh-user
-    user: name="{{ yh_user }}" " state=absent
+    user: name="{{ yh_user }}" state=absent
 
   tags: rm-yh-group-user
 
