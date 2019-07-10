@@ -1,0 +1,18 @@
+---
+# sub tasks file for yh-user
+
+
+# 删除组用户
+- block:
+
+  - name: rm-from-sudoers-if-exist
+    file: path="{{ global_sudoers_ext_file }}" state=absent
+
+  - name: rm-yh-group
+    group: name="{{ yh_group }}" state=absent
+
+  - name: rm-yh-user
+    user: name="{{ yh_user }}" " state=absent
+
+  tags: rm-yh-group-user
+

@@ -1,0 +1,9 @@
+---
+# defaults file for yh-ssh-key
+
+
+# ####################################
+# User Config
+# ####################################
+end_user: "foobar"
+debug_mode: False

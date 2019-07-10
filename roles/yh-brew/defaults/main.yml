@@ -1,0 +1,12 @@
+---
+# defaults file for yh-brew
+
+
+# User Config
+sub_cmd: config
+brew_user: brew
+end_user: '' # empty same as brew_user
+
+
+# Advanced/Optional Config
+brew_install_home: /home/linuxbrew/.linuxbrew

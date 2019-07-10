@@ -1,0 +1,19 @@
+---
+# sub tasks for yh-brew
+
+
+# 安装
+- block:
+
+  - name: copy-brew-install-file-2-stub
+    copy: src=linuxbrew-install dest=~/stub mode=0755
+
+  - name: deploy-brew-env
+    command: ~/stub/linuxbrew-install
+    environment:
+      CI: 1
+    ignore_errors: true
+    register: brew_install_result
+
+  - debug: msg="brew_install_result | {{ brew_install_result }}"
+  tags: deploy brew

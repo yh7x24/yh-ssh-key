@@ -1,0 +1,30 @@
+---
+# sub tasks for yh-brew
+
+
+# copy 环境变量
+- block:
+  - name: verify-env-dir
+    file: state=directory path="~/bin/env.d/" mode=0755
+  - name: copy-env-file
+    copy: src="brew.env" dest="~/bin/env.d/brew.env" mode=0755
+  tags: brew.env env.d
+
+
+# 匹配用户配置文件
+- block:
+  - set_fact: user_profile="~/.bash_profile"
+    when: ansible_os_family == "RedHat"
+  - set_fact: user_profile="~/.bashrc"
+    when: ansible_os_family == "Debian"
+  - debug: msg="user_profile={{ user_profile }}"
+
+
+# 配置环境变量文件
+- block:
+  - name: append-brew-2-bash-env-file
+    lineinfile:
+      path: "{{ user_profile }}"
+      line: "source ~/bin/env.d/brew.env # added by yh-brew"
+      create: yes
+  tags: brew.env

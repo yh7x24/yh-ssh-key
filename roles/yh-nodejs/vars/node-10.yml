@@ -1,0 +1,14 @@
+---
+# nodejs 10.x config
+
+
+nodejs_ver: "10.16"
+nodejs_version: "10.16.0"
+nodejs_pkg_md5: "88a233b41b26c1603d38f8b18c793a87"
+nodejs_pkg_name: "node-v{{ nodejs_version }}-linux-x64.tar.gz"
+nodejs_install_dir_name: "node-v{{ nodejs_version }}-linux-x64"
+nodejs_download_url: "https://npm.taobao.org/mirrors/node/v{{ nodejs_version }}/{{ nodejs_pkg_name }}"
+
+nodejs_local_pkg_path: "{{ software_stub_dir_path }}/{{ nodejs_pkg_name }}"
+nodejs_install_home: "{{ software_opt_dir_path }}/{{ nodejs_install_dir_name }}"
+nodejs_global_link_home: "{{ global_kits_home }}/nodejs-{{ nodejs_ver }}"

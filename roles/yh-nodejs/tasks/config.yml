@@ -1,0 +1,29 @@
+---
+# sub tasks for yh-nodejs
+
+
+# 配置
+- name: verify-env-dir
+  file: state=directory path="~/bin/env.d" recurse=yes
+
+- name: config-nodejs-env
+  template:
+    src: nodejs.env.j2
+    dest: "~/bin/env.d/nodejs.env"
+    mode: 0755
+
+
+# 匹配用户配置文件
+- block:
+  - set_fact: user_profile="~/.bash_profile"
+    when: ansible_os_family == "RedHat"
+  - set_fact: user_profile="~/.bashrc"
+    when: ansible_os_family == "Debian"
+  - debug: msg="user_profile={{ user_profile }}"
+
+- name: append-nodejs-2-bash-env-file
+  lineinfile:
+    path: "{{ user_profile }}"
+    line: "source ~/bin/env.d/nodejs.env # added by yh-nodejs"
+    create: yes
+  tags: nodejs.env

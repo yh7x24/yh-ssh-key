@@ -1,0 +1,47 @@
+---
+# sub tasks for yh-brew
+# 环境准备
+
+
+
+# ####################################
+# 安装必备环境
+# ####################################
+
+# 安装 Ubuntu 系列环境
+- block:
+  - name: install-deps-tools-libs
+    apt: 
+      name: [ "ruby" ]
+    when: ansible_os_family == "Debian"
+  tags: install-deps-tools-libs
+
+
+# 安装 Redhat/CentOS 系列环境
+- block:
+  - name: install-deps-tools-libs
+    yum: 
+      name: [ "ruby" ]
+    when: ansible_os_family == "RedHat"
+  tags: install-deps-tools-libs
+
+
+# ####################################
+# 目录准备
+# ####################################
+- block:
+  - name: login-brew-user-and-get-info
+    stat: path="~/"
+    register: user_home_stat_result
+  - set_fact: brew_group={{ user_home_stat_result.stat.gr_name }}
+  - set_fact: brew_gid={{ user_home_stat_result.stat.gid }}
+  - set_fact: brew_uid={{ user_home_stat_result.stat.uid }}
+  - debug: msg="brew {{ brew_user }}/{{ brew_group }}/{{ brew_uid }}/{{ brew_gid }}"
+  become: true
+  become_user: "{{ brew_user }}"
+  tags: user-name-2-info
+
+- block:
+  - name: verify-brew-install-dir | {{ brew_install_home }}
+    file: path="{{ brew_install_home }}" state=directory recurse=yes owner="{{ brew_user }}" group="{{ brew_group }}"
+

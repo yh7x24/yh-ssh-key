@@ -1,0 +1,6 @@
+---
+# handlers file for yh-os-init
+
+
+- name: restart ntpd
+  service: name=ntpd state=restarted

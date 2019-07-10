@@ -1,0 +1,31 @@
+---
+# sub tasks file for yh-mongo
+#
+# Init And Do Common
+#
+
+
+# 计算绿色安装用户信息
+- block:
+  - stat: path="/home/linuxbrew/.linuxbrew"
+    register: brew_stat_result
+  - set_fact: software_install_user={{ brew_stat_result.stat.pw_name }}
+  - set_fact: software_install_group={{ brew_stat_result.stat.gr_name }}
+  - debug: msg="software_install_user={{ software_install_user }}, software_install_group={{ software_install_group }}"
+
+
+# 绿色安装
+- block:
+  - include_tasks: install.yml
+  become: true
+  become_user: "{{ software_install_user }}"
+  when: sub_cmd != "uninstall"
+
+
+# 系统级配置
+- block:
+  - include_tasks: install-sudo.yml
+  become: true
+  become_user: root
+  when: sub_cmd != "uninstall"
+

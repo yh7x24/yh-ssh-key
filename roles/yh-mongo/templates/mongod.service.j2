@@ -1,0 +1,14 @@
+[Unit]
+Description={{ mongod_service_name }}
+After=yh-run-clean.service network.target
+
+[Service]
+Type=forking
+ExecStart={{ mongod_service_ctl_script }} start
+ExecStop={{ mongod_service_ctl_script }} stop
+ExecRestart={{ mongod_service_ctl_script }} restart
+ExecReload={{ mongod_service_ctl_script }} reload
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

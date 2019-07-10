@@ -1,0 +1,25 @@
+galaxy_info:
+  author: yh7x24
+  description: OS-Init for RedHat/CentOS Debian/Ubuntu.
+  company: yvhai
+  license: license (BSD, MIT)
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: RedHat/CentOS
+      versions:
+        - 6
+        - 7
+    - name: Debian/Ubuntu
+      versions:
+        - 16
+        - 18
+
+  galaxy_tags:
+    - OS
+    - Init
+    - Linux
+    - Selinux
+    - ulimit
+
+dependencies: []

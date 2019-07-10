@@ -1,0 +1,29 @@
+---
+# sub tasks file for yh-nodejs
+#
+# Init And Do Common
+#
+
+
+# 计算绿色安装用户信息
+- block:
+  - stat: path="/home/linuxbrew/.linuxbrew"
+    register: brew_stat_result
+  - set_fact: software_install_user={{ brew_stat_result.stat.pw_name }}
+  - set_fact: software_install_group={{ brew_stat_result.stat.gr_name }}
+  - debug: msg="software_install_user={{ software_install_user }}, software_install_group={{ software_install_group }}"
+
+
+# 版本控制
+- block:
+  - include_vars: node-{{ main_version }}.yml
+  tags: version
+
+
+# 绿色安装
+- block:
+  - include_tasks: install.yml
+  - include_tasks: install-ext.yml
+  become: true
+  become_user: "{{ software_install_user }}"
+  when: sub_cmd != "uninstall"

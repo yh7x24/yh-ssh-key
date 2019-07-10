@@ -1,0 +1,11 @@
+---
+# sub tasks for yh-brew
+
+
+# 测试改变用户
+- block:
+  - name: become-user-test
+    shell: pwd && whoami && id
+  # become: true
+  # become_user: "{{ brew_user }}"
+  tags: test become

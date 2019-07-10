@@ -1,0 +1,28 @@
+---
+# sub tasks file for yh-run-clean
+#
+# Remove Service: yh-run-clean 
+#
+
+
+# ####################################
+# Service - Scripts (remove)
+# ####################################
+- block:
+
+  - name: unreg-svc
+    systemd: name="{{ yhrc_service_name }}" enabled=no
+
+  - name: rm-svc-gened-file
+    file: path="{{ item }}" state=absent
+    with_items:
+      - "/lib/systemd/system/{{ yhrc_service_name }}.service"
+      - "{{ yhrc_service_ctl_script }}"
+
+  become: true
+  become_user: root
+
+
+# ####################################
+# Service - Dataset (keep)
+# ####################################

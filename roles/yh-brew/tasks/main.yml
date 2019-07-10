@@ -1,0 +1,44 @@
+---
+# tasks file for yh-brew
+
+
+# ####################################
+# Sudo
+# ####################################
+- block:
+  - include_tasks: sudo/pre-do.yml
+  become: true
+  become_user: root
+
+
+# ####################################
+# Normal(brew) User do
+# ####################################
+# Install (Should be normal user)
+- block:
+  - include_tasks: install.yml
+  become: true
+  become_user: "{{ brew_user }}"
+  when: sub_cmd == 'install' or sub_cmd == 'config'
+
+
+# Check and Autoset Default End User
+- block:
+  - set_fact: end_user={{ brew_user }}
+    when: not end_user
+
+
+# Configure for End User
+- block:
+  - include_tasks: config.yml
+  become: true
+  become_user: "{{ end_user }}"
+  when: sub_cmd == 'config'
+
+
+# # Test
+# - block:
+#   - include_tasks: test.yml
+#   become: true
+#   become_user: "{{ brew_user }}"
+#   when: sub_cmd == 'test' or sub_cmd == 'auto'

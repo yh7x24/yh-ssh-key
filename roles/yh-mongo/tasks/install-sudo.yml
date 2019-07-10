@@ -1,0 +1,23 @@
+---
+# sub tasks for yh-mongo
+#
+# 安装 - 系统相关的配置
+#
+
+
+# 修改系统配置
+- block:
+
+  - name: set-transparent_hugepate-2-never
+    command: "echo never > {{ item }}"
+    with_items:
+      - /sys/kernel/mm/transparent_hugepage/enabled
+      - /sys/kernel/mm/transparent_hugepage/defrag
+    run_once: yes
+
+  - lineinfile:
+      dest: /etc/rc.local 
+      line: "{{ item }}"
+    with_items:
+      - echo never >> /sys/kernel/mm/transparent_hugepage/enabled
+      - echo never >> /sys/kernel/mm/transparent_hugepage/defrag
