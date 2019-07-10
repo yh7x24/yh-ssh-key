@@ -13,7 +13,7 @@
   - name: install-deps-tools-libs
     apt: 
       name: [ "ruby" ]
-    when: ansible_os_family == "Debian"
+    when: ansible_os_family == "Debian" or ansible_os_family == "elementary OS"
   tags: install-deps-tools-libs
 
 
@@ -30,6 +30,7 @@
 # 目录准备
 # ####################################
 - block:
+  - debug: msg="brew_user {{brew_user}}"
   - name: login-brew-user-and-get-info
     stat: path="~/"
     register: user_home_stat_result
@@ -39,6 +40,7 @@
   - debug: msg="brew {{ brew_user }}/{{ brew_group }}/{{ brew_uid }}/{{ brew_gid }}"
   become: true
   become_user: "{{ brew_user }}"
+  # become_method: su
   tags: user-name-2-info
 
 - block:

@@ -16,7 +16,7 @@
   - set_fact: user_profile="~/.bash_profile"
     when: ansible_os_family == "RedHat"
   - set_fact: user_profile="~/.bashrc"
-    when: ansible_os_family == "Debian"
+    when: ansible_os_family == "Debian" or ansible_os_family == "elementary OS"
   - debug: msg="user_profile={{ user_profile }}"
 
 

@@ -25,5 +25,7 @@ galaxy_info:
     - ruby
     - green
 
-dependencies:
-  - { role: yh-os-init }
+
+dependencies: []
+# dependencies:
+#   - { role: yh-os-init }
