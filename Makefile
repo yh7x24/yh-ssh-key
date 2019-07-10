@@ -7,7 +7,9 @@ DATA_SUF = $(shell date +"%Y.%m.%d.%H.%M.%S")
 GUP_MSG  = "Auto Commited at $(DATA_SUF)"
 DEPLOY_ENV =
 
-SUB_LIST = yh-os-init yh-user
+SUB_LIST = yh-os-init yh-user yh-brew yh-mongo \
+	   yh-run-clean yh-nodejs \
+	   yh-ssh-key
 
 ifdef MSG
 	GUP_MSG = "$(MSG)"
